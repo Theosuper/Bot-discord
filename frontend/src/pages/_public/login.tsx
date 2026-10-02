@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { loginIntoApp } from "@/requests/auth.request";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 
@@ -52,7 +53,16 @@ function LoginPage() {
             });
           }}
         />
-        <Button>Logar</Button>
+        <Button
+          onClick={() => {
+            loginIntoApp({
+              password: formulario.password,
+              login: formulario.email,
+            });
+          }}
+        >
+          Logar
+        </Button>
       </Card>
     </div>
   );
