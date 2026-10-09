@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardTitle } from "@/components/ui/card";
+import { Card, CardFooter, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+
 import { useState } from "react";
 
 export const Route = createFileRoute("/_public/register")({
@@ -86,6 +87,12 @@ function RegisterPage() {
           }}
         />
         <Button>Registrar</Button>
+        <CardFooter>
+          Já possui uma conta?
+          <span className="text-blue-700 pl-2 hover:text-blue-600">
+            <Link to="/login">Logue na sua conta agora</Link>
+          </span>
+        </CardFooter>
       </Card>
     </div>
   );

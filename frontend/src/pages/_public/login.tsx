@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardTitle } from "@/components/ui/card";
+import { Card, CardFooter, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { loginIntoApp } from "@/requests/auth.request";
-import { createFileRoute } from "@tanstack/react-router";
+import { useUserStore } from "@/zustand/user.store";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 
 export const Route = createFileRoute("/_public/login")({
@@ -19,6 +21,18 @@ function LoginPage() {
     email: "",
     password: "",
   });
+  const { setUser } = useUserStore();
+  const navigate = useNavigate();
+  async function handleLogin() {
+    const resposta = loginIntoApp({
+      password: formulario.password,
+      login: formulario.email,
+    });
+    setUser(resposta);
+    navigate({ to: "/chat" });
+    useNavigate;
+  }
+
   return (
     <div className="w-full h-full flex items-center justify-center">
       <Card className="w-128 p-4">
@@ -53,16 +67,14 @@ function LoginPage() {
             });
           }}
         />
-        <Button
-          onClick={() => {
-            loginIntoApp({
-              password: formulario.password,
-              login: formulario.email,
-            });
-          }}
-        >
-          Logar
-        </Button>
+        <Button onClick={handleLogin}>Logar</Button>
+
+        <CardFooter>
+          Não tem conta ainda?
+          <span className="text-blue-700 pl-2 hover:text-blue-600">
+            <Link to="/register">Registre sua conta agora</Link>
+          </span>
+        </CardFooter>
       </Card>
     </div>
   );
