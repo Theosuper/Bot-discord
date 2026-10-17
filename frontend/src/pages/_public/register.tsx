@@ -2,7 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { loginIntoApp, registerIntoApp } from "@/requests/auth.request";
+import { useUserStore } from "@/zustand/user.store";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 
 import { useState } from "react";
 
@@ -23,6 +25,21 @@ function RegisterPage() {
     password: "",
     confirmPassword: "",
   });
+
+  const { setUser } = useUserStore();
+  const navigate = useNavigate();
+  async function handleRegister() {
+    const resposta = registerIntoApp({
+      password: formulario.password,
+      email: formulario.email,
+      name: formulario.name,
+      confirmPassword: formulario.confirmPassword,
+    });
+    setUser(resposta);
+    navigate({ to: "/chat" });
+    useNavigate;
+  }
+
   return (
     <div className="w-full h-full flex items-center justify-center">
       <Card className="w-128 p-4">
@@ -86,7 +103,7 @@ function RegisterPage() {
             });
           }}
         />
-        <Button>Registrar</Button>
+        <Button onClick={handleRegister}>Registrar</Button>
         <CardFooter>
           Já possui uma conta?
           <span className="text-blue-700 pl-2 hover:text-blue-600">

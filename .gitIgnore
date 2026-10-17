@@ -3,3 +3,4 @@
 /frontend/src/route-tree.gen.ts
 /backend/node_modules
 /backend/package-lock.json
+/backend/data/*

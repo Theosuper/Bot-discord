@@ -26,7 +26,7 @@ function LoginPage() {
   async function handleLogin() {
     const resposta = loginIntoApp({
       password: formulario.password,
-      login: formulario.email,
+      email: formulario.email,
     });
     setUser(resposta);
     navigate({ to: "/chat" });
