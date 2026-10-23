@@ -15,11 +15,11 @@ export class AuthController {
 
   @Post('login')
   login(@Body() payload: LoginDto) {
-    return this.authService.login();
+    return this.authService.login(payload);
   }
 
   @Post('register')
   register(@Body() payload: RegisterDto) {
-    return this.authService.register();
+    return this.authService.register(payload);
   }
 }
