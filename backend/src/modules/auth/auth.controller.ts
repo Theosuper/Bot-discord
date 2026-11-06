@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service.js';
 import { LoginDto, RegisterDto } from './auth.dto.js';
+import { AuthGuard } from './auth.guard.js';
 
 @Controller({
   path: 'auth',
@@ -11,6 +12,12 @@ export class AuthController {
   @Get()
   getAuth() {
     return this.authService.getInitialMessage();
+  }
+
+  @Get('me')
+  @UseGuards(AuthGuard)
+  me() {
+    return 'batata09';
   }
 
   @Post('login')

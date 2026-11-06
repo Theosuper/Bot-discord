@@ -12,3 +12,7 @@ export const registerIntoApp = (data: {
 }) => {
   return apiRequest.post(API_Routes.AUTH.REGISTER, data);
 };
+
+export const meRequest = () => {
+  return apiRequest.get(API_Routes.AUTH.ME);
+};

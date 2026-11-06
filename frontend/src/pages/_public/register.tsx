@@ -92,7 +92,7 @@ function RegisterPage() {
         <Label>Confirm Password</Label>
         <Input
           placeholder="******"
-          type="confirmPassword"
+          type="password"
           value={formulario.confirmPassword}
           onChange={(event) => {
             setFormulario((oldValue) => {

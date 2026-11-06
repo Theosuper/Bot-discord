@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { loginIntoApp } from "@/requests/auth.request";
+import { loginIntoApp, meRequest } from "@/requests/auth.request";
 import { useUserStore } from "@/zustand/user.store";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
@@ -32,7 +32,7 @@ function LoginPage() {
     navigate({ to: "/chat" });
     useNavigate;
   }
-
+  meRequest();
   return (
     <div className="w-full h-full flex items-center justify-center">
       <Card className="w-128 p-4">

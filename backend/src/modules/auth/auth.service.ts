@@ -19,17 +19,27 @@ export class AuthService {
 
   async login(payload: LoginDto) {
     const { email, password } = payload;
-    const hashPassword = await bcript.hash(
-      password,
-      12, // quantidade de embaralhamento da senha
-    );
-    const user = await this.userRepository.findOneBy({
-      email,
+    const userWithPassword = await this.userRepository.findOne({
+      where: { email },
+      select: {
+        id: true,
+        password: true,
+      },
     });
-    if (!user) {
+    if (!userWithPassword) {
       throw new BadRequestException('Não existe um usuário com esse email!');
     }
-
+    console.log('user', userWithPassword);
+    const passwordIsEqual = await bcript.compare(
+      password,
+      userWithPassword.password, // quantidade de embaralhamento da senha
+    );
+    if (!passwordIsEqual) {
+      throw new BadRequestException('Senha incorreta!');
+    }
+    const user = await this.userRepository.findOne({
+      where: { id: userWithPassword.id },
+    });
     return user;
   }
 
